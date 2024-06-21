@@ -1,10 +1,10 @@
 import telebot
 from telebot.types import Message, ChatPermissions
 
-bot = telebot.TeleBot('TOKEN')
+bot = telebot.TeleBot('TOKEN') # TOKEN HERE
 
 @bot.message_handler(commands=['start'])
-def start(message: Message):
+def start(message: Message): # Start Command
     if message.chat.type == "private":
         bot.reply_to(message, (
         "👋 **Thanks for using the GR0UPDX Bot!**\n\n"
@@ -20,14 +20,14 @@ def start(message: Message):
     else:
         print("MEWO")
 @bot.message_handler(commands=['kick'])
-def kick(message: Message):
+def kick(message: Message): # Kick Command
     chatid = message.chat.id
     if message.chat.type == "private":
         bot.reply_to(message, f"Add Me In Group..")
     else:
         userid = message.from_user.id
         member = bot.get_chat_member(chatid, userid)
-        if member.status == 'administrator' or member.status == 'creator':
+        if member.status == 'administrator' or member.status == 'creator': # Check
             userM = message.reply_to_message.from_user.id
             bot.kick_chat_member(message.chat.id, userM)
             bot.reply_to(message, "User kicked !")
@@ -35,7 +35,7 @@ def kick(message: Message):
             bot.reply_to(message, "You are not an admin in this group.")
     
 @bot.message_handler(commands=['pin'])
-def pin(message: Message):
+def pin(message: Message): # Pin Command
     chatid = message.chat.id
     if message.chat.type == "private":
         bot.reply_to(message, f"Add Me In Group..")
@@ -47,7 +47,7 @@ def pin(message: Message):
         else:
             userid = message.from_user.id
             member = bot.get_chat_member(chatid, userid)
-            if member.status == 'administrator' or member.status == 'creator':
+            if member.status == 'administrator' or member.status == 'creator': 
                 if message.reply_to_message:
                     bot.pin_chat_message(chatid, message.reply_to_message.message_id)
                     bot.reply_to(message, "Done !")
@@ -57,7 +57,7 @@ def pin(message: Message):
                 bot.reply_to(message, "You are not an admin in this group.")
 
 @bot.message_handler(commands=['mute'])
-def mute(message: Message):
+def mute(message: Message): # Mute Command
     chatid = message.chat.id
     if message.chat.type == "private":
         bot.reply_to(message, f"Add Me In Group ..")
@@ -86,7 +86,7 @@ def mute(message: Message):
                 bot.reply_to(message, "Error.")
 
 @bot.message_handler(commands=['unmute'])
-def unmute(message: Message):
+def unmute(message: Message): # Unmute Command
     chatid = message.chat.id
     
     if message.chat.type == "private":
